@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PromptPilot — AI Prompt Generator & Engineering Studio</title>
+  <meta name="description" content="Generate high-impact, production-grade prompts for ChatGPT, Claude, Gemini, and Midjourney. Built with industry-standard prompt engineering frameworks. 100% free and client-side.">
+  <meta name="keywords" content="AI prompt generator, prompt engineering, ChatGPT prompts, Claude XML prompts, Gemini prompts, Midjourney prompts, CO-STAR framework, RTF framework">
+  <meta name="theme-color" content="#06080d">
+
+  <!-- Open Graph / Social Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PromptPilot — AI Prompt Generator & Engineering Studio">
+  <meta property="og:description" content="Craft high-precision prompts for ChatGPT, Claude, Gemini, and Midjourney without paid API keys.">
+  <meta property="og:image" content="https://promptpilot.netlify.app/og-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- SVG Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2338bdf8'/%3E%3Cstop offset='50%25' stop-color='%236366f1'/%3E%3Cstop offset='100%25' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Cpath d='M16 6 L18.5 13.5 L26 16 L18.5 18.5 L16 26 L13.5 18.5 L6 16 L13.5 13.5 Z' fill='%23ffffff'/%3E%3C/svg%3E">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- Ambient Glowing Aura -->
+  <div class="ambient-glow" aria-hidden="true"></div>
+  <div class="ambient-dot-grid" aria-hidden="true"></div>
+
+  <!-- =========================================================
+       NAVIGATION BAR
+       ========================================================= -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo" aria-label="PromptPilot Home">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+        </div>
+        <span>PromptPilot</span>
+        <span class="brand-badge">Studio</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="#generator" class="nav-link">Studio</a>
+        <a href="#examples" class="nav-link">Examples</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#frameworks" class="nav-link">Frameworks</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button type="button" class="btn btn-sm btn-outline" id="btn-open-saved" aria-label="View Saved Prompts">
+          <span>Favorites</span>
+          <span class="btn-badge-counter" id="saved-count-badge">0</span>
+        </button>
+        <a href="#generator" class="btn btn-sm btn-primary">Launch Studio</a>
+        <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================
+       HERO SECTION
+       ========================================================= -->
+  <section class="hero-section" id="hero">
+    <div class="container hero-content">
+      <div class="hero-pill">
+        <span class="hero-pill-sparkle">✨</span>
+        <span>Proven Frameworks (CO-STAR & RTF) • 100% Free & Client-Side</span>
+      </div>
+
+      <h1 class="hero-title">
+        Craft High-Impact <br>
+        <span class="gradient-text">AI Prompts in Seconds</span>
+      </h1>
+
+      <p class="hero-desc">
+        Stop getting vague, generic AI outputs. PromptPilot systematically engineers structured, production-grade instructions for ChatGPT, Claude, Gemini, and Midjourney without requiring paid API keys.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#generator" class="btn btn-primary">
+          <span>Generate Structured Prompt</span>
+          <svg class="icon-inline" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+          </svg>
+        </a>
+        <a href="#examples" class="btn btn-outline">Explore 15+ Examples</a>
+      </div>
+
+      <!-- Before vs After Interactive Showcase -->
+      <div class="hero-preview-wrapper">
+        <div class="preview-topbar">
+          <div class="window-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+          </div>
+          <span class="preview-title">Prompt Engineering Difference</span>
+          <span style="width: 32px"></span>
+        </div>
+        <div class="preview-grid">
+          <div class="preview-col">
+            <span class="preview-badge badge-vague">❌ Unstructured Idea (Vague)</span>
+            <p class="preview-prompt-text">
+              "Write a node js api for user auth with jwt tokens and make it secure."
+            </p>
+          </div>
+          <div class="preview-col">
+            <span class="preview-badge badge-engineered">✅ Engineered Prompt (CO-STAR)</span>
+            <p class="preview-prompt-text">
+              <strong>Act as a Principal Security Architect.</strong><br>
+              Context: Production Node.js/Express REST API.<br>
+              Directives: Implement JWT with HTTP-only cookies, argon2 password hashing, and token rotation.<br>
+              Constraints: No plaintext tokens, include TypeScript interfaces, omit conversational filler.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Value / Metrics Strip -->
+      <div class="stats-strip">
+        <div class="stat-item">
+          <div class="stat-number">5 Core</div>
+          <div class="stat-label">Domain Disciplines</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100% Free</div>
+          <div class="stat-label">No Paid API Keys</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">Multi-Model</div>
+          <div class="stat-label">GPT-4o, Claude & Gemini</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">Zero Tracking</div>
+          <div class="stat-label">Runs 100% In Browser</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CATEGORY SELECTOR BAR
+       ========================================================= -->
+  <section class="section" id="categories" style="padding-bottom: 20px;">
+    <div class="container">
+      <div class="section-header" style="margin-bottom: 28px;">
+        <span class="section-badge">Choose Your Discipline</span>
+        <h2 class="section-title">Built for Specialized Workflows</h2>
+        <p class="section-subtitle">Select a category to load curated frameworks and specialized persona blueprints.</p>
+      </div>
+
+      <div class="category-tabs-wrapper">
+        <div class="category-tabs" id="category-tabs" role="tablist">
+          <!-- Populated dynamically via presets.js -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       PROMPT GENERATOR STUDIO
+       ========================================================= -->
+  <section class="section" id="generator" style="padding-top: 10px;">
+    <div class="container">
+      <div class="generator-studio">
+
+        <!-- Left Column: Input Configuration Form -->
+        <div class="generator-panel">
+          <div class="panel-header">
+            <div class="panel-title-group">
+              <svg class="icon-inline" style="color: var(--accent-cyan);" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+              </svg>
+              <h2 class="panel-title">Prompt Configuration</h2>
+            </div>
+            <button type="button" class="btn btn-xs btn-ghost" id="btn-random-inspiration" title="Fill with random creative inspiration">
+              🎲 Random Idea
+            </button>
+          </div>
+
+          <div class="panel-body">
+            <form id="prompt-form" novalidate>
+              
+              <!-- Quick Preset Picker -->
+              <div class="form-group preset-selector-group">
+                <label for="field-preset-picker" class="form-label">
+                  <span>Quick Template Presets</span>
+                  <span class="form-label-hint">1-click load pre-built blueprints</span>
+                </label>
+                <select id="field-preset-picker" class="form-select">
+                  <!-- Populated dynamically -->
+                </select>
+              </div>
+
+              <!-- Topic / Subject -->
+              <div class="form-group">
+                <label for="field-topic" class="form-label">
+                  <span>Topic / Subject Matter <span style="color: var(--accent-rose)">*</span></span>
+                  <span class="form-label-hint">What is the central focus?</span>
+                </label>
+                <input type="text" id="field-topic" class="form-input" placeholder="e.g., PostgreSQL query optimization for 50M+ rows" required>
+                <span class="field-error-msg" id="field-topic-error"></span>
+              </div>
+
+              <!-- Core Goal / Purpose -->
+              <div class="form-group">
+                <label for="field-purpose" class="form-label">
+                  <span>Primary Goal / Purpose <span style="color: var(--accent-rose)">*</span></span>
+                  <span class="form-label-hint">What should the AI accomplish?</span>
+                </label>
+                <textarea id="field-purpose" class="form-textarea" rows="2" placeholder="e.g., Analyze slow execution plans and provide exact compound index definitions with code examples" required></textarea>
+                <span class="field-error-msg" id="field-purpose-error"></span>
+              </div>
+
+              <!-- Target Audience & Category -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="field-audience" class="form-label">
+                    <span>Target Audience</span>
+                  </label>
+                  <input type="text" id="field-audience" class="form-input" value="Senior Backend Engineers">
+                  <span class="field-error-msg" id="field-audience-error"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="field-category" class="form-label">
+                    <span>Discipline / Domain</span>
+                  </label>
+                  <select id="field-category" class="form-select">
+                    <option value="coding">💻 Coding & Dev</option>
+                    <option value="studying">📚 Studying & Academia</option>
+                    <option value="writing">✍️ Writing & Content</option>
+                    <option value="marketing">📈 Marketing & Sales</option>
+                    <option value="creative">🎨 Creative & Design</option>
+                    <option value="general">⚡ General / Universal</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Tone & Output Format -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="field-tone" class="form-label">
+                    <span>Tone & Posture</span>
+                  </label>
+                  <select id="field-tone" class="form-select">
+                    <option value="Technical & Precise">Technical & Precise</option>
+                    <option value="Professional & Authoritative">Professional & Authoritative</option>
+                    <option value="Socratic & Inquisitive">Socratic & Inquisitive</option>
+                    <option value="Casual & Friendly">Casual & Friendly</option>
+                    <option value="Persuasive & Action-Oriented">Persuasive & Action-Oriented</option>
+                    <option value="Academic & Rigorous">Academic & Rigorous</option>
+                    <option value="Creative & Imaginative">Creative & Imaginative</option>
+                    <option value="Concise & Direct">Concise & Direct</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="field-output-format" class="form-label">
+                    <span>Output Format</span>
+                  </label>
+                  <select id="field-output-format" class="form-select">
+                    <option value="Clean Code with Comments & Types">Clean Code with Comments & Types</option>
+                    <option value="Step-by-Step Implementation Guide">Step-by-Step Implementation Guide</option>
+                    <option value="Markdown Comparison Table">Markdown Comparison Table</option>
+                    <option value="Executive Summary with Key Takeaways">Executive Summary with Key Takeaways</option>
+                    <option value="Actionable Bullet Points">Actionable Bullet Points</option>
+                    <option value="Social Media Post / Thread">Social Media Post / Thread</option>
+                    <option value="Essay / Long-form Article">Essay / Long-form Article</option>
+                    <option value="Interactive Quiz / Flashcards">Interactive Quiz / Flashcards</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Target Model -->
+              <div class="form-group">
+                <label for="field-model" class="form-label">
+                  <span>Target AI Model</span>
+                  <span class="form-label-hint">Optimizes prompt structure syntax</span>
+                </label>
+                <select id="field-model" class="form-select">
+                  <option value="universal">Universal LLM (Standard Markdown)</option>
+                  <option value="chatgpt">ChatGPT (GPT-4o / GPT-4)</option>
+                  <option value="claude">Claude 3.5 Sonnet (XML Semantic Tags)</option>
+                  <option value="gemini">Google Gemini 1.5/2.0 (Structured Directives)</option>
+                  <option value="midjourney">Midjourney v6 / Image Diffusion</option>
+                </select>
+                <div class="model-format-notice" id="model-format-notice"></div>
+              </div>
+
+              <!-- Collapsible Advanced Settings -->
+              <button type="button" class="advanced-toggle-btn" id="advanced-toggle-btn" aria-expanded="false">
+                <span>⚙️ Advanced Prompt Directives (Role, Constraints, Chain-of-Thought)</span>
+                <span class="toggle-arrow">▼</span>
+              </button>
+
+              <div class="advanced-fields-drawer" id="advanced-fields-drawer">
+                <div class="form-group">
+                  <label for="field-persona" class="form-label">
+                    <span>Expert Role / Persona</span>
+                    <span class="form-label-hint">Overrides default category persona</span>
+                  </label>
+                  <input type="text" id="field-persona" class="form-input" placeholder="e.g., Principal Distributed Systems Engineer with 15+ years experience">
+                </div>
+
+                <div class="form-group">
+                  <label for="field-constraints" class="form-label">
+                    <span>Negative Constraints & Guardrails</span>
+                    <span class="form-label-hint">What should the AI strictly avoid?</span>
+                  </label>
+                  <textarea id="field-constraints" class="form-textarea" rows="2" placeholder="e.g., Avoid generic boilerplate, do not use ORM abstractions, focus strictly on raw SQL query performance."></textarea>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label class="checkbox-toggle-label">
+                    <input type="checkbox" id="field-cot" checked>
+                    <span><strong>Enable Chain-of-Thought:</strong> Forces AI to reason step-by-step before answering.</span>
+                  </label>
+                  <label class="checkbox-toggle-label">
+                    <input type="checkbox" id="field-few-shot">
+                    <span><strong>Include Few-Shot Scaffold:</strong> Provides structured response outline template.</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Form Action Buttons -->
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary" id="btn-generate" style="flex: 1;">
+                  <svg class="icon-inline" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>Generate Prompt</span>
+                </button>
+                <button type="button" class="btn btn-outline" id="btn-reset-form" title="Clear inputs">
+                  Reset
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+        <!-- Right Column: Output Workspace Panel -->
+        <div class="output-panel">
+          <div class="panel-header">
+            <div class="panel-title-group">
+              <svg class="icon-inline" style="color: var(--accent-emerald);" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <h2 class="panel-title">Engineered Output</h2>
+            </div>
+            <span class="panel-badge" id="metric-framework-badge">CO-STAR Framework</span>
+          </div>
+
+          <!-- Output Metrics Bar -->
+          <div class="output-metrics-bar">
+            <div class="metrics-pills">
+              <span class="metric-pill" id="metric-word-count">0 words</span>
+              <span class="metric-pill" id="metric-token-count">~0 tokens</span>
+              <div class="metric-pill metric-pill-quality" title="Prompt Quality Score">
+                <span>Score: <strong id="metric-quality-score">95/100</strong></span>
+                <div class="quality-bar-track">
+                  <div class="quality-bar-fill" id="quality-score-bar"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="toolbar-right">
+              <button type="button" class="btn btn-xs btn-ghost" id="btn-toggle-view">
+                ✏️ Edit Raw Text
+              </button>
+            </div>
+          </div>
+
+          <!-- Action Toolbar -->
+          <div class="output-toolbar">
+            <div class="toolbar-left">
+              <button type="button" class="btn btn-sm btn-primary" id="btn-copy-prompt">
+                <svg class="icon-inline" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"/>
+                  <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"/>
+                </svg>
+                <span>Copy to Clipboard</span>
+              </button>
+              <button type="button" class="btn btn-sm btn-outline" id="btn-save-prompt" title="Save to browser favorites">
+                ⭐ Save
+              </button>
+            </div>
+
+            <div class="toolbar-right">
+              <button type="button" class="btn btn-xs btn-outline" id="btn-export-md" title="Download .md file">
+                📥 .md
+              </button>
+              <button type="button" class="btn btn-xs btn-outline" id="btn-export-txt" title="Download .txt file">
+                📥 .txt
+              </button>
+            </div>
+          </div>
+
+          <!-- Output Content Area -->
+          <div class="output-content-area">
+            
+            <!-- Empty State -->
+            <div class="output-empty-state" id="output-empty-state">
+              <div class="empty-state-icon">⚡</div>
+              <h3>Ready to engineer your prompt</h3>
+              <p>Configure your topic, goal, and tone on the left, or pick one of the pre-crafted templates above to generate a structured prompt.</p>
+            </div>
+
+            <!-- Active Output State -->
+            <div class="output-active-state" id="output-active-state">
+              <!-- Segmented Formatted Cards -->
+              <div class="prompt-segments-list" id="prompt-text-display">
+                <!-- Segments populated dynamically -->
+              </div>
+
+              <!-- Raw Textarea Mode -->
+              <div class="prompt-raw-wrapper" id="prompt-raw-wrapper">
+                <textarea id="prompt-raw-textarea" class="prompt-raw-textarea" spellcheck="false"></textarea>
+              </div>
+
+              <div class="output-footer-info">
+                <span>🔒 Generated 100% locally in your browser. Zero third-party telemetry. Ready for ChatGPT, Claude & Gemini.</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CURATED EXAMPLES SHOWCASE
+       ========================================================= -->
+  <section class="section section-alt" id="examples">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Prompt Library</span>
+        <h2 class="section-title">Tested Real-World Blueprints</h2>
+        <p class="section-subtitle">
+          Explore curated prompts engineered for high-performance outcomes. Click any card to customize it in the studio or copy it immediately.
+        </p>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="examples-filter-bar" id="examples-filter-bar">
+        <button type="button" class="filter-btn active" data-filter="all">All Disciplines</button>
+        <button type="button" class="filter-btn" data-filter="coding">💻 Coding</button>
+        <button type="button" class="filter-btn" data-filter="studying">📚 Studying</button>
+        <button type="button" class="filter-btn" data-filter="writing">✍️ Writing</button>
+        <button type="button" class="filter-btn" data-filter="marketing">📈 Marketing</button>
+        <button type="button" class="filter-btn" data-filter="creative">🎨 Creative</button>
+      </div>
+
+      <!-- Examples Grid -->
+      <div class="examples-grid" id="examples-grid">
+        <!-- Rendered dynamically via presets.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       WHY PROMPT ENGINEERING / FEATURES BENTO GRID
+       ========================================================= -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Systematic Engineering</span>
+        <h2 class="section-title">Why Prompt Structure Trumps Guesswork</h2>
+        <p class="section-subtitle">
+          Large language models aren’t telepathic. Quality outputs require explicit role calibration, clear objectives, and negative boundaries.
+        </p>
+      </div>
+
+      <div class="bento-grid">
+        <div class="bento-card bento-card-large">
+          <div class="bento-icon">🎯</div>
+          <h3 class="bento-title">CO-STAR & RTF Architecture</h3>
+          <p class="bento-desc">
+            We synthesize Context, Objective, Style, Tone, Audience, and Response specifications into a unified blueprint. This eliminates ambiguity and prevents AI hallucinations.
+          </p>
+        </div>
+
+        <div class="bento-card">
+          <div class="bento-icon">🔒</div>
+          <h3 class="bento-title">100% Client-Side Privacy</h3>
+          <p class="bento-desc">
+            Your proprietary project ideas never leave your browser. Zero API tracking, zero telemetry, and zero paid subscription tokens required.
+          </p>
+        </div>
+
+        <div class="bento-card">
+          <div class="bento-icon">⚡</div>
+          <h3 class="bento-title">Multi-Model Syntax Adaptation</h3>
+          <p class="bento-desc">
+            From Anthropic Claude's preferred XML semantic tags to Midjourney v6 camera parameters, prompts are formatted specifically for each engine's strengths.
+          </p>
+        </div>
+
+        <div class="bento-card">
+          <div class="bento-icon">📊</div>
+          <h3 class="bento-title">Real-Time Quality Diagnostics</h3>
+          <p class="bento-desc">
+            An automated checklist audits your prompt in real-time, verifying whether role clarity, negative constraints, and output boundaries are established.
+          </p>
+        </div>
+
+        <div class="bento-card">
+          <div class="bento-icon">💾</div>
+          <h3 class="bento-title">Local Favorites & History</h3>
+          <p class="bento-desc">
+            Save your most effective prompts locally in your browser. Reopen, edit, or export them anytime with a single click.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       FRAMEWORK CHEATSHEET & ACADEMY
+       ========================================================= -->
+  <section class="section section-alt" id="frameworks">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Prompting Cheatsheet</span>
+        <h2 class="section-title">Frameworks That Power PromptPilot</h2>
+        <p class="section-subtitle">
+          Master the foundational frameworks used by top AI researchers and prompt engineers worldwide.
+        </p>
+      </div>
+
+      <div class="frameworks-grid">
+        <div class="framework-card">
+          <div class="framework-header">
+            <span class="framework-abbr">CO-STAR</span>
+            <span class="framework-name">Framework (Comprehensive Context)</span>
+          </div>
+          <p style="color: var(--text-secondary); font-size: 0.92rem;">
+            Ideal for complex deliverables, strategic consulting, and long-form technical syntheses.
+          </p>
+          <ul class="framework-list">
+            <li class="framework-item"><span class="framework-letter">C</span><span><strong>Context:</strong> Provide essential background circumstances.</span></li>
+            <li class="framework-item"><span class="framework-letter">O</span><span><strong>Objective:</strong> Explicitly state the exact task to accomplish.</span></li>
+            <li class="framework-item"><span class="framework-letter">S</span><span><strong>Style:</strong> Dictate writing cadence (e.g. academic, journalistic).</span></li>
+            <li class="framework-item"><span class="framework-letter">T</span><span><strong>Tone:</strong> Establish emotional stance (e.g. authoritative, friendly).</span></li>
+            <li class="framework-item"><span class="framework-letter">A</span><span><strong>Audience:</strong> Calibrate technical depth to the intended reader.</span></li>
+            <li class="framework-item"><span class="framework-letter">R</span><span><strong>Response:</strong> Enforce strict output format (JSON, Markdown, code).</span></li>
+          </ul>
+        </div>
+
+        <div class="framework-card">
+          <div class="framework-header">
+            <span class="framework-abbr">RTF</span>
+            <span class="framework-name">Framework (Rapid Execution)</span>
+          </div>
+          <p style="color: var(--text-secondary); font-size: 0.92rem;">
+            Perfect for rapid coding tasks, refactoring, quick quizzes, and concise copy generation.
+          </p>
+          <ul class="framework-list">
+            <li class="framework-item"><span class="framework-letter">R</span><span><strong>Role:</strong> "Act as a Principal Security Architect..."</span></li>
+            <li class="framework-item"><span class="framework-letter">T</span><span><strong>Task:</strong> "Audit this endpoint for OWASP Top 10 vulnerabilities..."</span></li>
+            <li class="framework-item"><span class="framework-letter">F</span><span><strong>Format:</strong> "Return results formatted as a Markdown table with severity ratings..."</span></li>
+          </ul>
+          <div style="margin-top: 24px; padding: 14px; border-radius: 8px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.2); font-size: 0.86rem; color: var(--accent-cyan);">
+            💡 <strong>Pro-Tip:</strong> Always include negative constraints ("Do not include pleasantries, do not assume third-party APIs") to prevent conversational fluff.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CONTACT FORM (NETLIFY COMPATIBLE)
+       ========================================================= -->
+  <section class="section" id="contact">
+    <div class="container contact-section-inner">
+      <div class="section-header">
+        <span class="section-badge">Feedback & Requests</span>
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="section-subtitle">
+          Have a suggestion for a prompt framework, a bug to report, or general feedback? We’d love to hear from you.
+        </p>
+      </div>
+
+      <div class="contact-card">
+        <!-- Netlify-compatible form -->
+        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form" novalidate>
+          
+          <!-- Netlify hidden form name -->
+          <input type="hidden" name="form-name" value="contact">
+
+          <!-- Honeypot anti-spam field -->
+          <p class="hidden-bot-field">
+            <label>Don’t fill this out if you're human: <input name="bot-field"></label>
+          </p>
+
+          <div class="form-group">
+            <label for="contact-name" class="form-label">
+              <span>Your Name <span style="color: var(--accent-rose)">*</span></span>
+            </label>
+            <input type="text" id="contact-name" name="name" class="form-input" placeholder="e.g., Alex Johnson" required>
+            <span class="field-error-msg" id="contact-name-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="contact-email" class="form-label">
+              <span>Email Address <span style="color: var(--accent-rose)">*</span></span>
+            </label>
+            <input type="email" id="contact-email" name="email" class="form-input" placeholder="alex@example.com" required>
+            <span class="field-error-msg" id="contact-email-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="contact-category" class="form-label">
+              <span>Reason for Contact</span>
+            </label>
+            <select id="contact-category" name="category" class="form-select">
+              <option value="feature-request">✨ Request a Prompt Template or Feature</option>
+              <option value="bug-report">🐛 Report an Issue</option>
+              <option value="general-question">💬 General Inquiry</option>
+              <option value="partnership">🤝 Collaboration / Partnership</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="contact-message" class="form-label">
+              <span>Your Message <span style="color: var(--accent-rose)">*</span></span>
+            </label>
+            <textarea id="contact-message" name="message" class="form-textarea" rows="4" placeholder="Share your suggestions, questions, or ideas..." required></textarea>
+            <span class="field-error-msg" id="contact-msg-error"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            <span>Send Message</span>
+            <svg class="icon-inline" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/>
+            </svg>
+          </button>
+        </form>
+
+        <!-- Dynamic Success Confirmation Feedback -->
+        <div class="contact-success-msg" id="contact-success-msg">
+          <div class="success-icon-badge">✓</div>
+          <h3>Message Received!</h3>
+          <p>Thank you for reaching out. We have logged your submission and will get back to you shortly.</p>
+          <button type="button" class="btn btn-sm btn-outline" id="btn-send-another">
+            Send Another Message
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#" class="brand-logo">
+            <div class="brand-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+            <span>PromptPilot</span>
+          </a>
+          <p>
+            An open, client-side prompt engineering studio empowering students, developers, and creators to achieve peak AI precision.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Studio</h4>
+          <ul>
+            <li><a href="#generator">Prompt Generator</a></li>
+            <li><a href="#examples">Curated Blueprints</a></li>
+            <li><a href="#categories">Domain Categories</a></li>
+            <li><a href="#frameworks">CO-STAR & RTF Guides</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Supported Models</h4>
+          <ul>
+            <li><a href="#generator">ChatGPT (GPT-4o)</a></li>
+            <li><a href="#generator">Claude 3.5 Sonnet</a></li>
+            <li><a href="#generator">Google Gemini 1.5/2.0</a></li>
+            <li><a href="#generator">Midjourney v6</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="#contact">Contact Support</a></li>
+            <li><a href="https://github.com" target="_blank" rel="noopener">GitHub Repository</a></li>
+            <li><a href="https://www.netlify.com" target="_blank" rel="noopener">Netlify Hosting</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 PromptPilot. All rights reserved. 100% Client-Side & Privacy Preserving.
+        </div>
+        <div>
+          <a href="#hero" class="footer-badge-link">
+            <span>Hosted on Netlify</span>
+            <span style="color: var(--accent-cyan);">●</span>
+            <span>Static & Blazing Fast</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       MODALS, DRAWERS & UTILITIES
+       ========================================================= -->
+
+  <!-- Saved Prompts Drawer -->
+  <div class="saved-drawer-overlay" id="saved-drawer-overlay"></div>
+  <aside class="saved-drawer" id="saved-drawer" aria-labelledby="saved-drawer-title" role="dialog" aria-modal="true">
+    <div class="saved-drawer-header">
+      <h3 id="saved-drawer-title">⭐ Saved Prompts</h3>
+      <button type="button" class="btn btn-xs btn-ghost" id="btn-close-saved" aria-label="Close saved drawer">&times;</button>
+    </div>
+    <div class="saved-drawer-content">
+      <div class="saved-prompts-list" id="saved-prompts-list">
+        <!-- Rendered via storage.js -->
+      </div>
+    </div>
+    <div class="saved-drawer-footer">
+      <button type="button" class="btn btn-xs btn-ghost" id="btn-clear-all-saved" style="color: var(--accent-rose);">
+        Clear All
+      </button>
+      <span style="font-size: 0.78rem; color: var(--text-dim);">Stored locally in your browser</span>
+    </div>
+  </aside>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+  <aside class="mobile-nav-drawer" id="mobile-nav-drawer" role="dialog" aria-modal="true">
+    <div class="mobile-nav-header">
+      <div class="brand-logo">
+        <span>PromptPilot</span>
+      </div>
+      <button type="button" class="btn btn-xs btn-ghost" id="mobile-menu-close" aria-label="Close menu">&times;</button>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="#generator">Studio</a></li>
+      <li><a href="#examples">Examples</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#frameworks">Frameworks</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="mobile-nav-actions">
+      <a href="#generator" class="btn btn-primary" style="width: 100%;">Open Generator</a>
+    </div>
+  </aside>
+
+  <!-- Floating Back to Top Button -->
+  <button type="button" class="back-to-top" id="back-to-top" aria-label="Scroll back to top">
+    <svg viewBox="0 0 20 20" fill="currentColor" style="width: 20px; height: 20px;">
+      <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd"/>
+    </svg>
+  </button>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- Universal Application Script (Supports both HTTP/Netlify & direct file:// preview) -->
+  <script src="js/bundle.js"></script>
+
+</body>
+</html>
